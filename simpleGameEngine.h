@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstdint>
+
 #else
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,26 +16,26 @@
 #if defined(__ATARI_ST__)
 #include <osbind.h>
 #include <gem.h>
-
+#endif
 //c linkage functions
 #if defined(__cplusplus)
 extern "C" {
 #endif
-  vbl();
-  hbl();
-  vbl_hbl_init();
-  vbl_hbl_restore();
+int  vbl();
+int  hbl();
+void  vbl_hbl_init();
+void  vbl_hbl_restore();
 #if defined(__cplusplus)
 }
-
+#endif
 class simpleGameEngine 
 {
    private:
-#endif
 short *screen_mem;
 short *window_mem;
 short *window_buffer;
 short *screen_buffer;
+int hand;
 // window cordinates 
 short x,y,w,h;
 
@@ -47,13 +48,14 @@ struct st_draw_buffer {
 st_draw_buffer draw_buffer;
 #if defined(__cplusplus)
    public:
+ simpleGameEngine(short x,short y,short w,short h); 
 simpleGameEngine();
 ~simpleGameEngine();
 #endif
-drawPixel();
-clearBuffer();
-drawRectangle();
-drawRectangleFilled();
+void drawPixel();
+void clearBuffer();
+int drawRectangle();
+int drawRectangleFilled();
 #if defined(__cplusplus)
 };
 #endif
