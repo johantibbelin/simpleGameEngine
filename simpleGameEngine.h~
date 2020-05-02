@@ -1,0 +1,29 @@
+#ifndef _SIMPLEGAMEENGINE_H_
+#define _SIMPLEGAMEENGINE_H_
+
+// includes
+#if defined(__cplusplus)
+#include <cstdio>
+#include <cstdlib>
+#include <cstdint>
+#else
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#endif
+
+#if defined(__ATARI_ST__)
+#include <osbind.h>
+#include <gem.h>
+
+//c linkage functions
+#if defined(__cplusplus)
+extern "C" {
+#endif
+  vbl();
+  hbl();
+  vbl_hbl_init();
+
+#if defined(__cplusplus)
+}
+#endif
