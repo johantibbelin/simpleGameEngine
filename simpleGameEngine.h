@@ -45,6 +45,8 @@ class simpleGameEngine
   short *window_buffer;
   short *screen_buffer;
   int hand;
+  // Pixel size
+  short pixel_size_x=1,pixel_size_y=1;
   // window cordinates 
   short x,y,w,h;
   // Window work area cordinates
@@ -72,6 +74,8 @@ class simpleGameEngine
  void clearBuffer();
 int drawRectangle();
 int drawRectangleFilled();
+ void setPixelSize(short size);
+ void clear(short c);
 #if defined(__cplusplus)
 };
 #endif
