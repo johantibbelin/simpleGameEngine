@@ -3,9 +3,9 @@
 
 // includes
 #if defined(__cplusplus)
-#include <cstdio>
-#include <cstdlib>
-#include <cstdint>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
 
 #else
 #include <stdio.h>
@@ -33,11 +33,17 @@ class simpleGameEngine
    private:
 short *screen_mem;
 short *window_mem;
+// If double buffer is used 
 short *window_buffer;
 short *screen_buffer;
 int hand;
 // window cordinates 
 short x,y,w,h;
+// Window work area cordinates
+ short ax,ay,aw,ah;
+ // Line start and end mask
+ short start_mask,end_mask; 
+
 
 struct st_draw_buffer {
   uint16_t bplane0;
@@ -52,7 +58,7 @@ st_draw_buffer draw_buffer;
 simpleGameEngine();
 ~simpleGameEngine();
 #endif
-void drawPixel();
+ void drawPixel(short x,short y,short color);
 void clearBuffer();
 int drawRectangle();
 int drawRectangleFilled();

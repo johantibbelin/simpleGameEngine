@@ -9,6 +9,7 @@
 
 int main()
 {
-
+  simpleGameEngine ge = simpleGameEngine(0,0,320,200);
+  while (1) {}
   return 0;
 }
