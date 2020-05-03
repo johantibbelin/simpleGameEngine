@@ -50,7 +50,7 @@ class simpleGameEngine
   // Window work area cordinates
   short ax,ay,aw,ah;
  // Line start and end mask
-  short start_mask,end_mask; 
+  uint16_t start_mask,end_mask; 
   
 
   struct st_draw_buffer {
