@@ -1,6 +1,13 @@
 #ifndef _SIMPLEGAMEENGINE_H_
 #define _SIMPLEGAMEENGINE_H_
 
+//macros
+#ifdef _DEBUG_
+#define _DEBUG_ 1
+#else
+#define _DEBUG_ 0
+#endif
+
 // includes
 #if defined(__cplusplus)
 #include <stdio.h>
@@ -30,36 +37,39 @@ void  vbl_hbl_restore();
 #endif
 class simpleGameEngine 
 {
-   private:
-short *screen_mem;
-short *window_mem;
-// If double buffer is used 
-short *window_buffer;
-short *screen_buffer;
-int hand;
-// window cordinates 
-short x,y,w,h;
-// Window work area cordinates
- short ax,ay,aw,ah;
+
+ private:
+  short *screen_mem;
+  short *window_mem;
+  // If double buffer is used 
+  short *window_buffer;
+  short *screen_buffer;
+  int hand;
+  // window cordinates 
+  short x,y,w,h;
+  // Window work area cordinates
+  short ax,ay,aw,ah;
  // Line start and end mask
- short start_mask,end_mask; 
+  short start_mask,end_mask; 
+  
 
-
-struct st_draw_buffer {
+  struct st_draw_buffer {
   uint16_t bplane0;
   uint16_t bplane1;
   uint16_t bplane2;
   uint16_t bplane3;
 };
-st_draw_buffer draw_buffer;
+  void printBin(int num);
+ 
+  st_draw_buffer draw_buffer;
 #if defined(__cplusplus)
-   public:
+ public:
  simpleGameEngine(short x,short y,short w,short h); 
-simpleGameEngine();
-~simpleGameEngine();
+ simpleGameEngine();
+ ~simpleGameEngine();
 #endif
  void drawPixel(short x,short y,short color);
-void clearBuffer();
+ void clearBuffer();
 int drawRectangle();
 int drawRectangleFilled();
 #if defined(__cplusplus)
