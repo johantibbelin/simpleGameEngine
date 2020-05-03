@@ -30,8 +30,10 @@ simpleGameEngine::simpleGameEngine(short x,short y,short w,short h)
   int shadr = (int)s >> 16;
   int sladr = ((int)s & 0xFFFF);
   wind_set(hand,2,shadr,sladr,0,0);
-  clear(2);
+  clear(2); // clear with bg color
+  graf_growbox(0,0,5,5,x,y,w,h);
   wind_open(hand,x,y,w,h);
+  graf_mouse(0,0);
   ax=x+1;
   ay=y+11;
   aw=w-2;
@@ -122,12 +124,7 @@ void simpleGameEngine::clearBuffer()
   window_mem = screen_mem + 80 * ay;
   short * screen_ptr = window_mem;
   int ix,iy;
-  if (_DEBUG_) {
-    printf("clearBuffer numbers:\n");
-    printf("sb: %d eb: %d \n",sb,eb);
-    printf("start_mask: %d",start_mask);
-    printf(" end_mask: %d\n",end_mask);
- }
+  
   for (int y=0;y < ah-11; y++) {
     for (x=0; x < 20;x++) {
       if (x == 0) {
