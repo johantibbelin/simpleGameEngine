@@ -146,8 +146,69 @@ void simpleGameEngine::clearBuffer()
     }
   } 
 }
+void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
+{
+  //Horisontal
+  if (y1 == y2)
+    {
+      int sb = y1 % 16;
+      int eb = 16 - (y2 % 16);
+      short start_mask = 0xffff >> sb;
+      short end_mask = 0xffff << eb;
+      int bp0 = c & 0x01;
+      int bp1 = (c & 0x02) >> 1;
+      int bp2 = (c & 0x04) >> 2;
+      int bp3 = (c & 0x08) >> 3;
+      if (bp0) 
+	bp0 = 0xffff;
+      else
+	bp0 = 0x0000;
+      if (bp1) 
+	bp1 = 0xffff;
+      else
+	bp1 = 0x0000;
+      if (bp2) 
+	bp2 = 0xffff;
+      else
+	bp2 = 0x0000;
+      if (bp3) 
+	bp3 = 0xffff;
+      else
+	bp3 = 0x0000;
+      short bp0_start = start_mask & bp0;
+      short bp1_start = start_mask & bp1;
+      short bp2_start = start_mask & bp2;
+      short bp3_start = start_mask & bp3;
+      short bp0_end = end_mask & bp0;
+      short bp1_end = end_mask & bp1;
+      short bp2_end = end_mask & bp2;
+      short bp3_end = end_mask & bp3;
+      short *screen_ptr = screen_mem;
+      screen_ptr += 80 * y1 + x1 / 16;
+      for (int i=0; i < ( (x2 / 16) - (y1 / 16) ); i++)
+	{
+	  if (i==0) {
+	    *(screen_ptr++) |= bp0_start;
+	    *(screen_ptr++) |= bp1_start;
+	    *(screen_ptr++) |= bp2_start;
+	    *(screen_ptr++) |= bp3_start;
+	  } else if (i== (x2/16-y1/16)) {
+	    *(screen_ptr++) |= bp0_end;
+	    *(screen_ptr++) |= bp1_end;
+	    *(screen_ptr++) |= bp2_end;
+	    *(screen_ptr++) |= bp3_end;
+	  } else {
+	    *(screen_ptr++) = bp0;
+	    *(screen_ptr++) = bp1;
+	    *(screen_ptr++) = bp2;
+	    *(screen_ptr++) = bp3;
 
-int simpleGameEngine::drawRectangle()
+	  }
+	}
+    }
+}
+
+void simpleGameEngine::drawRectangle()
 {
 
 }

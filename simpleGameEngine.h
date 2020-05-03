@@ -44,7 +44,7 @@ class simpleGameEngine
   // If double buffer is used 
   short *window_buffer;
   short *screen_buffer;
-  int hand;
+  //int hand;
   // Pixel size
   short pixel_size_x=1,pixel_size_y=1;
   // window cordinates 
@@ -66,16 +66,19 @@ class simpleGameEngine
   st_draw_buffer draw_buffer;
 #if defined(__cplusplus)
  public:
+  int hand;
  simpleGameEngine(short x,short y,short w,short h); 
  simpleGameEngine();
  ~simpleGameEngine();
 #endif
  void drawPixel(short x,short y,short color);
  void clearBuffer();
-int drawRectangle();
+void drawRectangle();
 int drawRectangleFilled();
  void setPixelSize(short size);
  void clear(short c);
+ void drawLine(short x1,short y1,short x2, short y2, short c);
+
 #if defined(__cplusplus)
 };
 #endif
