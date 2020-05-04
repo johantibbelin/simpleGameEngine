@@ -58,6 +58,8 @@ while (run) {
  ge.drawLine(20,20,300,20,2);
  ge.drawLine(20,40,300,40,3);
  ge.drawLine(20,60,300,60,4);
+ ge.drawLine(20,20,20,160,2);
+ ge.drawLine(300,20,300,160,2);
  while (1) {}
   return 0;
 }
