@@ -33,6 +33,7 @@ simpleGameEngine::simpleGameEngine(short x,short y,short w,short h)
   clear(2); // clear with bg color
   graf_growbox(0,0,5,5,x,y,w,h);
   wind_open(hand,x,y,w,h);
+  _window = true;
   graf_mouse(0,0);
   ax=x+1;
   ay=y+11;
@@ -151,8 +152,8 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
   //Horisontal
   if (y1 == y2)
     {
-      int sb = y1 % 16;
-      int eb = 16 - (y2 % 16);
+      int sb = x1 % 16;
+      int eb = 16 - (x2 % 16);
       short start_mask = 0xffff >> sb;
       short end_mask = 0xffff << eb;
       int bp0 = c & 0x01;
@@ -185,17 +186,29 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
       short bp3_end = end_mask & bp3;
       short *screen_ptr = screen_mem;
       screen_ptr += 80 * y1 + x1 / 16;
-      for (int i=0; i < ( (x2 / 16) - (y1 / 16) ); i++)
+      for (int i=0; i < ( (x2 / 16) - (x1 / 16) ); i++)
 	{
 	  if (i==0) {
+	    *(screen_ptr) &= ~start_mask;
+	    *(screen_ptr) &= start_mask;
 	    *(screen_ptr++) |= bp0_start;
+	    *(screen_ptr) &= ~start_mask;
+	    *(screen_ptr) &= start_mask;
 	    *(screen_ptr++) |= bp1_start;
+	    *(screen_ptr) &= start_mask;
+	    *(screen_ptr) &= ~start_mask;
 	    *(screen_ptr++) |= bp2_start;
+	    *(screen_ptr) &= start_mask;
+	    *(screen_ptr) &= ~start_mask;
 	    *(screen_ptr++) |= bp3_start;
-	  } else if (i== (x2/16-y1/16)) {
+	  } else if (i== (x2/16-x1/16)) {
+	    *(screen_ptr) &= ~end_mask;
 	    *(screen_ptr++) |= bp0_end;
+	    *(screen_ptr) &= ~end_mask;
 	    *(screen_ptr++) |= bp1_end;
+	    *(screen_ptr) &= ~end_mask;
 	    *(screen_ptr++) |= bp2_end;
+	    *(screen_ptr) &= ~end_mask;
 	    *(screen_ptr++) |= bp3_end;
 	  } else {
 	    *(screen_ptr++) = bp0;
@@ -243,6 +256,7 @@ void simpleGameEngine::clear(short c)
     bplane3 = 0xffff;
   else
     bplane3 = 0x0000;
+  if (!_window) {
   short *screen_ptr = screen_mem;
   for (int i=0; i < 4000; i++) {
     *(screen_ptr++) = bplane0;
@@ -250,5 +264,9 @@ void simpleGameEngine::clear(short c)
     *(screen_ptr++) = bplane2;
     *(screen_ptr++) = bplane3;
   }
+  } else {
+    // clear window
+  }
 }
+
 

@@ -20,7 +20,9 @@ int main()
   // std::chrono::time_point<std::chrono::system_clock> m_tp1,m_tp2; 
   //m_tp1 = m_tp2 = std::chrono::system_clock::now();
   //float fFrameTimer=0;
-  while (1) {
+  bool run=true;  
+  int fcount=0;
+while (run) {
     /* // Handle Timing
     m_tp2 = std::chrono::system_clock::now();
     std::chrono::duration<int> elapsedTime = m_tp2 - m_tp1;
@@ -49,7 +51,13 @@ int main()
 			framecount = 0;
 			}*/
 
-  
+  fcount++;
+  if (fcount > 50)
+    run = false;
 }
+ ge.drawLine(20,20,300,20,2);
+ ge.drawLine(20,40,300,40,3);
+ ge.drawLine(20,60,300,60,4);
+ while (1) {}
   return 0;
 }

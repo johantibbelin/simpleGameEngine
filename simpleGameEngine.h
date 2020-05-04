@@ -61,6 +61,7 @@ class simpleGameEngine
   uint16_t bplane2;
   uint16_t bplane3;
 };
+  bool _window = false;
   void printBin(int num);
  
   st_draw_buffer draw_buffer;
