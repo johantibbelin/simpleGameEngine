@@ -263,19 +263,14 @@ void simpleGameEngine::drawRectangle(short x1,short y1,short x2,short y2, short 
   drawLine(x2,y1,x2,y2,c);
   drawLine(x1,y2,x2,y2,c);
 }
-int simpleGameEngine::drawRectangleFilled(short x1,short y1,short x2,short y2, short c)
+void simpleGameEngine::drawRectangleFilled(short x1,short y1,short x2,short y2, short c)
 {
-  short lines,line=y1;
+  short line=y1;
   short tline=y2;
-  while (line < tline || line < 199 ) {
-    lines=line;
-    drawLine(x1,lines,x2,lines,c);
+  while (line < tline && line < 199 ) {
+     drawLine(x1,line,x2,line,c);
     line++;
-    if (line == tline)
-      goto brk;
   }
- brk:
-  printf("");
 }
 
 void simpleGameEngine::setPixelSize(short size)
