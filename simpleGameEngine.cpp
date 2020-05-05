@@ -126,7 +126,7 @@ void simpleGameEngine::clearBuffer()
   short * screen_ptr = window_mem;
   int ix,iy;
   
-  for (int y=0;y < ah-11; y++) {
+  for (int y=0;y <= ah; y++) {
     for (x=0; x < 20;x++) {
       if (x == 0) {
 	*(screen_ptr++) &= start_mask;
@@ -242,7 +242,7 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
 	bp3 = 0x0000;
       short* screen_ptr = screen_mem;
       screen_ptr += y1*80 + (x1/16)*4;
-      for (int i=0; i< y2+1; i++) {
+      for (int i=0; i<= y2-y1; i++) {
 	*(screen_ptr)   &= mask;
 	*(screen_ptr++) |= bp0;
 	*(screen_ptr)   &= mask;
@@ -256,16 +256,28 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
   }
 }
 
-void simpleGameEngine::drawRectangle()
+void simpleGameEngine::drawRectangle(short x1,short y1,short x2,short y2, short c)
 {
-
+  drawLine(x1,y1,x2,y1,c);
+  drawLine(x1,y1,x1,y2,c);
+  drawLine(x2,y1,x2,y2,c);
+  drawLine(x1,y2,x2,y2,c);
 }
 int simpleGameEngine::drawRectangleFilled(short x1,short y1,short x2,short y2, short c)
 {
-  for (int i=0;i < y2-y1;i++) {
-    drawLine(x1,y1+i,x2,y1+i,c);
+  short lines,line=y1;
+  short tline=y2;
+  while (line < tline || line < 199 ) {
+    lines=line;
+    drawLine(x1,lines,x2,lines,c);
+    line++;
+    if (line == tline)
+      goto brk;
   }
+ brk:
+  printf("");
 }
+
 void simpleGameEngine::setPixelSize(short size)
 {
   pixel_size_x = pixel_size_y = size;

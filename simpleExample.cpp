@@ -55,12 +55,14 @@ while (run) {
   if (fcount > 50)
     run = false;
 }
+ ge.clearBuffer();
  ge.drawLine(20,20,300,20,2);
  ge.drawLine(20,40,300,40,3);
  ge.drawLine(20,60,300,60,4);
  ge.drawLine(20,20,20,160,2);
  ge.drawLine(300,20,300,160,2);
- //ge.drawRectangleFilled(60, 60, 120, 120, 2);
+ ge.drawRectangle(60, 60, 120, 120, 2);
+ ge.drawRectangleFilled(80, 80, 100, 100, 4);
  while (1) {}
   return 0;
 }
