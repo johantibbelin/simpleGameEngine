@@ -32,3 +32,5 @@
 *.app
 *.cpp~
 *.prg
+simpleGameEngine.s
+simpleGameEngine_noopt.s
