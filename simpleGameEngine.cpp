@@ -253,6 +253,31 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
 	*(screen_ptr++) |= bp3;
 	screen_ptr += 76;
       }
+  } else {
+    int xc,yc;
+    short d,m;
+   int m_new = 2 * (y2 - y1); 
+   int slope_error_new = m_new - (x2 - x1); 
+   short* screen_ptr;
+   for (int x = x1, y = y1; x <= x2; x++) 
+   { 
+     xc = x % 16;
+     d= 0x8000 >> xc;
+     m = ~d;
+     screen_ptr = screen_mem + y* 80 + (x/16)*4; 
+     *(screen_ptr) &= m;
+     *(screen_ptr) |= d;
+      // Add slope to increment angle formed 
+      slope_error_new += m_new; 
+  
+      // Slope error reached limit, time to 
+      // increment y and update slope error. 
+      if (slope_error_new >= 0) 
+      { 
+         y++; 
+         slope_error_new  -= 2 * (x2 - x1); 
+      } 
+   } 
   }
 }
 
