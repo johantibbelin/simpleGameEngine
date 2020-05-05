@@ -60,6 +60,7 @@ while (run) {
  ge.drawLine(20,60,300,60,4);
  ge.drawLine(20,20,20,160,2);
  ge.drawLine(300,20,300,160,2);
+ //ge.drawRectangleFilled(60, 60, 120, 120, 2);
  while (1) {}
   return 0;
 }

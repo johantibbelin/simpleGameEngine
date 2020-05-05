@@ -1,5 +1,5 @@
 .globl _vbl
-
+.globl _jvbli
 _vbl:
-
-jb:	jmp 0x000000
+	addi.l #1,_vblcount
+_jvbl:	jmp 0x000000

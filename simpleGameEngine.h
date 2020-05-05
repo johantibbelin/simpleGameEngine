@@ -67,6 +67,7 @@ class simpleGameEngine
   st_draw_buffer draw_buffer;
 #if defined(__cplusplus)
  public:
+  extern "C" short vblcount;
   int hand;
  simpleGameEngine(short x,short y,short w,short h); 
  simpleGameEngine();
@@ -75,7 +76,7 @@ class simpleGameEngine
  void drawPixel(short x,short y,short color);
  void clearBuffer();
 void drawRectangle();
-int drawRectangleFilled();
+ int drawRectangleFilled(short x1,short y1,short x2,short y2,short c);
  void setPixelSize(short size);
  void clear(short c);
  void drawLine(short x1,short y1,short x2, short y2, short c);

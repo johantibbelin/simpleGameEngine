@@ -260,9 +260,11 @@ void simpleGameEngine::drawRectangle()
 {
 
 }
-int simpleGameEngine::drawRectangleFilled()
+int simpleGameEngine::drawRectangleFilled(short x1,short y1,short x2,short y2, short c)
 {
-
+  for (int i=0;i < y2-y1;i++) {
+    drawLine(x1,y1+i,x2,y1+i,c);
+  }
 }
 void simpleGameEngine::setPixelSize(short size)
 {
