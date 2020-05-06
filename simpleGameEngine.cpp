@@ -1,3 +1,4 @@
+// blurg
 // SimpleGameEngine impl.
 #include "simpleGameEngine.h"
 #include <stdio.h>
@@ -6,6 +7,7 @@
 #include <osbind.h>
 #include <gem.h>
 
+// helper function
 void simpleGameEngine::printBin(int num)
 {
   while (num) {
