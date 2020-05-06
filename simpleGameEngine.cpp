@@ -55,22 +55,11 @@ void simpleGameEngine::drawPixel(short x,short y,short color)
       short bp1 = (c & 0x02) >> 1;
       short bp2 = (c & 0x04) >> 2;
       short bp3 = (c & 0x08 ) >> 3;
-      if (bp0) 
-	bplane0 = 0xffff;
-      else
-	bplane0 = 0x0000;
-      if (bp1) 
-	bplane1 = 0xffff;
-      else
-	bplane1 = 0x0000;
-      if (bp2) 
-	bplane2 = 0xffff;
-      else
-	bplane2 = 0x0000;
-      if (bp3) 
-	bplane3 = 0xffff;
-      else
-	bplane3 = 0x0000;
+      bplane0 = bp0 ? 0xffff : 0x0;
+      bplane1 = bp1 ? 0xffff : 0x0;
+      bplane2 = bp2 ? 0xffff : 0x0;
+      bplane3 = bp3 ? 0xffff : 0x0;
+
       short *screen_ptr = screen_mem;
       screen_ptr+=16*80*y+x*4;
       for (int i=0; i < pixel_size_y;i++) {
@@ -109,7 +98,7 @@ void simpleGameEngine::drawPixel(short x,short y,short color)
 	screen_ptr+=76;
       }
     } else if (pixel_size_x == 1) {
-     short bp0 = c & 0x01;
+      short bp0 = c & 0x01;
       short bp1 = (c & 0x02) >> 1;
       short bp2 = (c & 0x04) >> 2;
       short bp3 = (c & 0x08 ) >> 3;
@@ -117,22 +106,11 @@ void simpleGameEngine::drawPixel(short x,short y,short color)
       bit = x % 16;
       d = 0x8000 >> bit;
       m = ~d;
-      if (bp0) 
-	bp0 = d;
-      else
-	bp0 = 0x0000;
-      if (bp1) 
-	bp1 = d;
-      else
-	bp1 = 0x0000;
-      if (bp2) 
-	bp2 = d;
-      else
-	bp2 = 0x0000;
-      if (bp3) 
-	bp3 = d;
-      else
-	bp3 = 0x0000;
+      bp0 = bp0 ? d : 0x0;
+      bp1 = bp1 ? d : 0x0;
+      bp2 = bp2 ? d : 0x0;
+      bp3 = bp3 ? d : 0x0;
+
       short *screen_ptr = screen_mem;
       screen_ptr+=80*y+(x/16)*4;
       *(screen_ptr) &= m;
@@ -155,15 +133,15 @@ void simpleGameEngine::drawCircle(short x, short y, short radius, short c)
   while (y0 >= x0) // only formulate 1/8 of circle
     {
         drawPixel(x + x0, y - y0, c);
-           drawPixel(x + y0, y - x0, c);
-      drawPixel(x + y0, y + x0, c);
-      drawPixel(x + x0, y + y0, c);
-      drawPixel(x - x0, y + y0, c);
-      drawPixel(x - y0, y + x0, c);
-      drawPixel(x - y0, y - x0, c);
-      drawPixel(x - x0, y - y0, c);
-      if (d < 0) d += 4 * x0++ + 6;
-      else d += 4 * (x0++ - y0--) + 10;
+	drawPixel(x + y0, y - x0, c);
+	drawPixel(x + y0, y + x0, c);
+	drawPixel(x + x0, y + y0, c);
+	drawPixel(x - x0, y + y0, c);
+	drawPixel(x - y0, y + x0, c);
+	drawPixel(x - y0, y - x0, c);
+	drawPixel(x - x0, y - y0, c);
+	if (d < 0) d += 4 * x0++ + 6;
+	else d += 4 * (x0++ - y0--) + 10;
     }
 }
 
@@ -215,22 +193,12 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
       int bp1 = (c & 0x02) >> 1;
       int bp2 = (c & 0x04) >> 2;
       int bp3 = (c & 0x08) >> 3;
-      if (bp0) 
-	bp0 = 0xffff;
-      else
-	bp0 = 0x0000;
-      if (bp1) 
-	bp1 = 0xffff;
-      else
-	bp1 = 0x0000;
-      if (bp2) 
-	bp2 = 0xffff;
-      else
-	bp2 = 0x0000;
-      if (bp3) 
-	bp3 = 0xffff;
-      else
-	bp3 = 0x0000;
+
+      bp0 = bp0 ? 0xffff : 0x0;
+      bp1 = bp1 ? 0xffff : 0x0;
+      bp2 = bp2 ? 0xffff : 0x0;
+      bp3 = bp3 ? 0xffff : 0x0;
+
       short bp0_start = start_mask & bp0;
       short bp1_start = start_mask & bp1;
       short bp2_start = start_mask & bp2;
@@ -279,22 +247,11 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
       int bp1 = (c & 0x02) >> 1;
       int bp2 = (c & 0x04) >> 2;
       int bp3 = (c & 0x08) >> 3;
-      if (bp0) 
-	bp0 = data;
-      else
-	bp0 = 0x0000;
-      if (bp1) 
-	bp1 = data;
-      else
-	bp1 = 0x0000;
-      if (bp2) 
-	bp2 = data;
-      else
-	bp2 = 0x0000;
-      if (bp3) 
-	bp3 = data;
-      else
-	bp3 = 0x0000;
+      bp0 = bp0 ? data : 0x0;
+      bp1 = bp1 ? data : 0x0;
+      bp2 = bp2 ? data : 0x0;
+      bp3 = bp3 ? data : 0x0;
+   
       short* screen_ptr = screen_mem;
       screen_ptr += y1*80 + (x1/16)*4;
       for (int i=0; i<= y2-y1; i++) {
@@ -323,22 +280,13 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
       int bp1 = (c & 0x02) >> 1;
       int bp2 = (c & 0x04) >> 2;
       int bp3 = (c & 0x08) >> 3;
-      if (bp0) 
-	bp0 = d;
-      else
-	bp0 = 0x0000;
-      if (bp1) 
-	bp1 = d;
-      else
-	bp1 = 0x0000;
-      if (bp2) 
-	bp2 = d;
-      else
-	bp2 = 0x0000;
-      if (bp3) 
-	bp3 = d;
-      else
-	bp3 = 0x0000;
+
+      bp0 = bp0 ? d : 0x0;
+      bp1 = bp1 ? d : 0x0;
+      bp2 = bp2 ? d : 0x0;
+      bp3 = bp3 ? d : 0x0;
+ 
+
      screen_ptr = screen_mem + y* 80 + (x/16)*4; 
      *(screen_ptr) &= m;
      *(screen_ptr++) |= bp0;
@@ -385,34 +333,22 @@ void simpleGameEngine::setPixelSize(short size)
 }
 void simpleGameEngine::clear(short c)
 {
-  short bplane0,bplane1,bplane2,bplane3;
+
   short bp0 = c & 0x01;
   short bp1 = (c & 0x02) >> 1;
   short bp2 = (c & 0x04) >> 2;
   short bp3 = (c & 0x08 ) >> 3;
-  if (bp0) 
-    bplane0 = 0xffff;
-  else
-    bplane0 = 0x0000;
-  if (bp1) 
-    bplane1 = 0xffff;
-  else
-    bplane1 = 0x0000;
-  if (bp2) 
-    bplane2 = 0xffff;
-  else
-    bplane2 = 0x0000;
-  if (bp3) 
-    bplane3 = 0xffff;
-  else
-    bplane3 = 0x0000;
+  bp0 = bp0 ? 0xffff : 0x0;
+  bp1 = bp1 ? 0xffff : 0x0;
+  bp2 = bp2 ? 0xffff : 0x0;
+  bp3 = bp3 ? 0xffff : 0x0;
   if (!_window) {
   short *screen_ptr = screen_mem;
   for (int i=0; i < 4000; i++) {
-    *(screen_ptr++) = bplane0;
-    *(screen_ptr++) = bplane1;
-    *(screen_ptr++) = bplane2;
-    *(screen_ptr++) = bplane3;
+    *(screen_ptr++) = bp0;
+    *(screen_ptr++) = bp1;
+    *(screen_ptr++) = bp2;
+    *(screen_ptr++) = bp3;
   }
   } else {
     // clear window
