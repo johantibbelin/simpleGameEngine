@@ -108,10 +108,65 @@ void simpleGameEngine::drawPixel(short x,short y,short color)
 	}
 	screen_ptr+=76;
       }
+    } else if (pixel_size_x == 1) {
+     short bp0 = c & 0x01;
+      short bp1 = (c & 0x02) >> 1;
+      short bp2 = (c & 0x04) >> 2;
+      short bp3 = (c & 0x08 ) >> 3;
+      short bit,d,m;
+      bit = x % 16;
+      d = 0x8000 >> bit;
+      m = ~d;
+      if (bp0) 
+	bp0 = d;
+      else
+	bp0 = 0x0000;
+      if (bp1) 
+	bp1 = d;
+      else
+	bp1 = 0x0000;
+      if (bp2) 
+	bp2 = d;
+      else
+	bp2 = 0x0000;
+      if (bp3) 
+	bp3 = d;
+      else
+	bp3 = 0x0000;
+      short *screen_ptr = screen_mem;
+      screen_ptr+=80*y+(x/16)*4;
+      *(screen_ptr) &= m;
+      *(screen_ptr++) |=bp0;
+      *(screen_ptr) &= m;
+      *(screen_ptr++) |=bp1;
+      *(screen_ptr) &= m;
+      *(screen_ptr++) |=bp2;
+      *(screen_ptr) &= m;
+      *(screen_ptr) |=bp3;
     }       
 }   
+void simpleGameEngine::drawCircle(short x, short y, short radius, short c)
+{
+  short x0 = 0;
+  short y0 = radius;
+  short d = 3 - 2 * radius;
+  if (!radius) return;
+  
+  while (y0 >= x0) // only formulate 1/8 of circle
+    {
+        drawPixel(x + x0, y - y0, c);
+           drawPixel(x + y0, y - x0, c);
+      drawPixel(x + y0, y + x0, c);
+      drawPixel(x + x0, y + y0, c);
+      drawPixel(x - x0, y + y0, c);
+      drawPixel(x - y0, y + x0, c);
+      drawPixel(x - y0, y - x0, c);
+      drawPixel(x - x0, y - y0, c);
+      if (d < 0) d += 4 * x0++ + 6;
+      else d += 4 * (x0++ - y0--) + 10;
+    }
+}
 
-                                                                                        
 void simpleGameEngine::clearBuffer()
 {
   short sb = ax % 16;
@@ -124,7 +179,7 @@ void simpleGameEngine::clearBuffer()
   this->end_mask = end_mask;
   window_mem = screen_mem + 80 * ay;
   short * screen_ptr = window_mem;
-  int ix,iy;
+  //  int ix,iy;
   
   for (int y=0;y <= ah; y++) {
     for (x=0; x < 20;x++) {
@@ -254,7 +309,7 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
 	screen_ptr += 76;
       }
   } else {
-    int xc,yc;
+    int xc; //,yc;
     short d,m;
    int m_new = 2 * (y2 - y1); 
    int slope_error_new = m_new - (x2 - x1); 
@@ -264,9 +319,35 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
      xc = x % 16;
      d= 0x8000 >> xc;
      m = ~d;
+      int bp0 = c & 0x01;
+      int bp1 = (c & 0x02) >> 1;
+      int bp2 = (c & 0x04) >> 2;
+      int bp3 = (c & 0x08) >> 3;
+      if (bp0) 
+	bp0 = d;
+      else
+	bp0 = 0x0000;
+      if (bp1) 
+	bp1 = d;
+      else
+	bp1 = 0x0000;
+      if (bp2) 
+	bp2 = d;
+      else
+	bp2 = 0x0000;
+      if (bp3) 
+	bp3 = d;
+      else
+	bp3 = 0x0000;
      screen_ptr = screen_mem + y* 80 + (x/16)*4; 
      *(screen_ptr) &= m;
-     *(screen_ptr) |= d;
+     *(screen_ptr++) |= bp0;
+     *(screen_ptr) &= m;
+     *(screen_ptr++) |= bp1;
+     *(screen_ptr) &= m;
+     *(screen_ptr++) |= bp2;
+     *(screen_ptr) &= m;
+     *(screen_ptr) |= bp3;
       // Add slope to increment angle formed 
       slope_error_new += m_new; 
   

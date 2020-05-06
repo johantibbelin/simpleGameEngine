@@ -14,8 +14,8 @@ int main()
   ge.setPixelSize(16);
   ge.drawPixel(5,5,1);
   ge.drawPixel(6,6,14);
-  short framecount=0;
-  short nLastFPS=0;
+  //  short framecount=0;
+  //  short nLastFPS=0;
   int x,y;
   // std::chrono::time_point<std::chrono::system_clock> m_tp1,m_tp2; 
   //m_tp1 = m_tp2 = std::chrono::system_clock::now();
@@ -67,6 +67,8 @@ while (run) {
  ge.drawLine(0,0,319,160,3);
  ge.drawLine(0,0,100,140,4);
  ge.drawLine(100,100,80,178,5);
+ ge.setPixelSize(1);
+ ge.drawCircle(100,100,25,2);
 while (1) {}
   return 0;
 }
