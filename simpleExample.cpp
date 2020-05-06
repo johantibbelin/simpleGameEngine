@@ -10,7 +10,7 @@
 
 int main()
 {
-  simpleGameEngine ge = simpleGameEngine(0,5,320,188);
+  simpleGameEngine ge = simpleGameEngine(0,5,320,187);
   ge.setPixelSize(16);
   ge.drawPixel(5,5,1);
   ge.drawPixel(6,6,14);
@@ -69,6 +69,7 @@ while (run) {
  ge.drawLine(100,100,80,178,5);
  ge.setPixelSize(1);
  ge.drawCircle(100,100,25,2);
+ ge.fillCircle(150, 100, 25, 4);
 while (1) {}
   return 0;
 }

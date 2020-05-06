@@ -81,6 +81,7 @@ void drawRectangleFilled(short x1,short y1,short x2,short y2,short c);
  void clear(short c);
  void drawLine(short x1,short y1,short x2, short y2, short c);
  void drawCircle(short x,short y,short radius,short c);
+ void fillCircle(short x, short y, short radius, short c);
 #if defined(__cplusplus)
 };
 #endif

@@ -145,6 +145,32 @@ void simpleGameEngine::drawCircle(short x, short y, short radius, short c)
     }
 }
 
+void simpleGameEngine::fillCircle(short x, short y, short radius, short c)
+{
+		// Taken from wikipedia
+		short x0 = 0;
+		short y0 = radius;
+		short d = 3 - 2 * radius;
+		if (!radius) return;
+
+		auto drawline = [&](int sx, int ex, int ny)
+		{
+			for (int i = sx; i <= ex; i++)
+				drawPixel(i, ny, c);
+		};
+
+		while (y0 >= x0)
+		{
+			// Modified to draw scan-lines instead of edges
+			drawline(x - x0, x + x0, y - y0);
+			drawline(x - y0, x + y0, y - x0);
+			drawline(x - x0, x + x0, y + y0);
+			drawline(x - y0, x + y0, y + x0);
+			if (d < 0) d += 4 * x0++ + 6;
+			else d += 4 * (x0++ - y0--) + 10;
+		}
+}
+
 void simpleGameEngine::clearBuffer()
 {
   short sb = ax % 16;
