@@ -78,6 +78,7 @@ class simpleGameEngine
 void drawRectangle(short x1,short y1,short x2,short y2, short c);
 void fillRectangle(short x1,short y1,short x2,short y2,short c);
  void drawTriangle(short x1, short y1, short x2, short y2, short x3, short y3, short c);
+ void fillTriangle(short x1,short y1,short x2,short y2,short x3,short y3,short c);
  void setPixelSize(short size);
  void clear(short c);
  void drawLine(short x1,short y1,short x2, short y2, short c);

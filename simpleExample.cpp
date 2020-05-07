@@ -76,6 +76,7 @@ while (run) {
  ge.drawLine(80,80,147,137,4);
  ge.clearBuffer();
  ge.drawTriangle(100, 100, 150,100, 150,150,6);
+ ge.fillTriangle(160,160,220,160,160,190,7);
  //ge.drawLine(100,100,150,100,5);
  //ge.drawLine(150,100,150,150,5);
  //ge.drawLine(100,100,150,150,5);
