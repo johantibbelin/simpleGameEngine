@@ -345,7 +345,7 @@ void simpleGameEngine::drawRectangle(short x1,short y1,short x2,short y2, short 
   drawLine(x2,y1,x2,y2,c);
   drawLine(x1,y2,x2,y2,c);
 }
-void simpleGameEngine::drawRectangleFilled(short x1,short y1,short x2,short y2, short c)
+void simpleGameEngine::fillRectangle(short x1,short y1,short x2,short y2, short c)
 {
   short line=y1;
   short tline=y2;
@@ -353,6 +353,13 @@ void simpleGameEngine::drawRectangleFilled(short x1,short y1,short x2,short y2, 
      drawLine(x1,line,x2,line,c);
     line++;
   }
+}
+
+void simpleGameEngine::drawTriangle(short x1, short y1, short x2, short y2, short x3, short y3, short c)
+{
+    drawLine(x1,y1,x2,y2,c);
+    drawLine(x2,y2,x3,y3,c);
+    drawLine(x3,y3,x1,y1,c);
 }
 
 void simpleGameEngine::setPixelSize(short size)

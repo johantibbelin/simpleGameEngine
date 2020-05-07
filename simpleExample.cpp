@@ -62,7 +62,7 @@ while (run) {
  ge.drawLine(20,20,20,160,2);
  ge.drawLine(300,20,300,160,2);
  ge.drawRectangle(60, 60, 120, 120, 2);
- ge.drawRectangleFilled(80, 80, 100, 100, 4);
+ ge.fillRectangle(80, 80, 100, 100, 4);
  ge.drawLine(0,0,150,150,2);
  ge.drawLine(0,0,319,160,3);
  ge.drawLine(0,0,100,140,4);
@@ -70,6 +70,7 @@ while (run) {
  ge.setPixelSize(1);
  ge.drawCircle(100,100,25,2);
  ge.fillCircle(150, 100, 25, 4);
+ ge.drawTriangle(150, 150, 100, 100, 75, 75, 2);
 while (1) {}
   return 0;
 }
