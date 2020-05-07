@@ -71,6 +71,14 @@ while (run) {
  ge.drawCircle(100,100,25,2);
  ge.fillCircle(150, 100, 25, 4);
  ge.drawTriangle(150, 150, 100, 100, 75, 75, 2);
+ ge.clearBuffer();
+ ge.drawLine(100,100,230,125,3);
+ ge.drawLine(80,80,147,137,4);
+ ge.clearBuffer();
+ ge.drawTriangle(100, 100, 150,100, 150,150,6);
+ //ge.drawLine(100,100,150,100,5);
+ //ge.drawLine(150,100,150,150,5);
+ //ge.drawLine(100,100,150,150,5);
 while (1) {}
   return 0;
 }

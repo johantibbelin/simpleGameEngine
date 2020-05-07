@@ -294,6 +294,15 @@ void simpleGameEngine::drawLine(short x1,short y1,short x2, short y2, short c)
 	screen_ptr += 76;
       }
   } else {
+      if (x2 < x1) {
+	  short tmpx,tmpy;
+	  tmpx = x1;
+	  tmpy = y1;
+	  x1 = x2;
+	  y1 = y2;
+	  x2 = tmpx;
+	  y2 = tmpy;
+      }
     int xc; //,yc;
     short d,m;
    int m_new = 2 * (y2 - y1); 
