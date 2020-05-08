@@ -49,6 +49,28 @@ simpleGameEngine::~simpleGameEngine()
 {
 
 }
+
+int simpleGameEngine::Construct(int32_t screen_w, int32_t screen_h, int32_t pixel_w, int32_t pixel_h, bool full_screen, bool vsync)
+{
+    iScreenSizeX = screen_w, 
+    iScreenSizeY =screen_h;
+    //vInvScreenSize = { 1.0f / float(screen_w), 1.0f / float(screen_h) };
+    iPixelSizeX = pixel_w;
+    iPixelSizeY = pixel_h;
+    iWindowSizeX = iScreenSizeX;
+    iWindowSizeY = iScreenSizeY;
+    bFullScreen = full_screen;
+    bEnableVsync = vsync;
+    //vPixel = 2.0f / vScreenSize;
+    
+    //if (vPixelSize.x <= 0 || vPixelSize.y <= 0 || vScreenSize.x <= 0 || vScreenSize.y <= 0)
+    //	return olc::FAIL;
+    
+    // Construct default font sheet
+    //olc_ConstructFontSheet();
+    return 0;
+}
+
 void simpleGameEngine::drawPixel(short x,short y,short color)
 {
   uint16_t bplane0,bplane1,bplane2,bplane3;
