@@ -62,7 +62,8 @@ class simpleGameEngine
   // Window work area cordinates
   short ax,ay,aw,ah;
  // Line start and end mask
-  uint16_t start_mask,end_mask; 
+  uint16_t start_mask,end_mask;
+  bool bAtomActive; 
   // stuff
   /*olc::vi2d  vScreenSize = { 0, 0 };
   olc::vf2d  vInvScreenSize = { 0,0 };
@@ -92,6 +93,9 @@ class simpleGameEngine
  ~simpleGameEngine();
  int Construct(int32_t screen_w, int32_t screen_h, int32_t pixel_w, int32_t pixel_h, bool full_screen, bool vsync);
 #endif
+ void Start();
+ void EngineThread();
+ void CoreUpdate();
  void drawPixel(short x,short y,short color);
  void clearBuffer();
 void drawRectangle(short x1,short y1,short x2,short y2, short c);
@@ -103,6 +107,7 @@ void fillRectangle(short x1,short y1,short x2,short y2,short c);
  void drawLine(short x1,short y1,short x2, short y2, short c);
  void drawCircle(short x,short y,short radius,short c);
  void fillCircle(short x, short y, short radius, short c);
+ virtual int OnUserUpdate(int time) = 0;
 #if defined(__cplusplus)
 };
 #endif

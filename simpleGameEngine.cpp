@@ -71,6 +71,45 @@ int simpleGameEngine::Construct(int32_t screen_w, int32_t screen_h, int32_t pixe
     return 0;
 }
 
+void simpleGameEngine::Start()
+{
+  screen_mem = (short*)Physbase();
+  hand = wind_create(3,x,y,w,h);
+  const char* s = "simpleGameEngine";
+  int shadr = (int)s >> 16;
+  int sladr = ((int)s & 0xFFFF);
+  wind_set(hand,2,shadr,sladr,0,0);
+  clear(2); // clear with bg color
+  graf_growbox(0,0,5,5,x,y,w,h);
+  wind_open(hand,x,y,w,h);
+  _window = true;
+  graf_mouse(0,0);
+  ax=x+1;
+  ay=y+11;
+  aw=w-2;
+  ah=h-12;
+   clearBuffer();    
+   // Start the thread
+   bAtomActive = true;
+   EngineThread();
+}
+   void simpleGameEngine::EngineThread()
+   {
+       while (bAtomActive)
+	   {
+	       while (bAtomActive) { CoreUpdate();  }
+	   }
+   }
+
+void simpleGameEngine::CoreUpdate()
+{
+    int time=0;
+    //time
+    if (!OnUserUpdate(time))
+	bAtomActive = false;
+//stuff
+}
+
 void simpleGameEngine::drawPixel(short x,short y,short color)
 {
   uint16_t bplane0,bplane1,bplane2,bplane3;
