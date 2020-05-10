@@ -52,11 +52,12 @@ simpleGameEngine::~simpleGameEngine()
 
 int simpleGameEngine::Construct(int32_t screen_w, int32_t screen_h, int32_t pixel_w, int32_t pixel_h, bool full_screen, bool vsync)
 {
-    iScreenSizeX = screen_w, 
-    iScreenSizeY =screen_h;
+    x = y = 0;
+    w = iScreenSizeX = screen_w, 
+    h = iScreenSizeY =screen_h;
     //vInvScreenSize = { 1.0f / float(screen_w), 1.0f / float(screen_h) };
-    iPixelSizeX = pixel_w;
-    iPixelSizeY = pixel_h;
+    pixel_size_x = iPixelSizeX = pixel_w;
+    pixel_size_y = iPixelSizeY = pixel_h;
     iWindowSizeX = iScreenSizeX;
     iWindowSizeY = iScreenSizeY;
     bFullScreen = full_screen;
@@ -124,8 +125,12 @@ void simpleGameEngine::drawPixel(short x,short y,short color)
       bplane2 = bp2 ? 0xffff : 0x0;
       bplane3 = bp3 ? 0xffff : 0x0;
 
-      short *screen_ptr = screen_mem;
+      short *screen_ptr = (short*) Physbase();
       screen_ptr+=16*80*y+x*4;
+      if (_DEBUG_) {
+	  printf("%d",&screen_ptr);
+	  Crawcin();
+      }
       for (int i=0; i < pixel_size_y;i++) {
 	if (x == 0) {
 	  *(screen_ptr) &= start_mask;

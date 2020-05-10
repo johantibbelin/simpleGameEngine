@@ -2,16 +2,40 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstdint>
+#include <osbind.h>
+#include <gem.h>
 //#include <chrono>
 
 #if defined(__ATARI_ST__)
 
 #endif
 
+int simpleGameEngine::OnUserUpdate(int time)
+{
+  if (_DEBUG_) {
+
+  Cconws("\027Y,23,0testy");
+  Crawcin();
+  }
+  //do stuff here
+ for (int xp=0;xp<20;xp++)
+    {
+      for (int yp=1;yp<12;yp++) 
+	{
+	  drawPixel(xp,yp,rand() % 16);
+	}
+    }
+}
+
 int main()
 {
-  simpleGameEngine ge = simpleGameEngine(0,5,320,187);
-  ge.setPixelSize(16);
+   simpleGameEngine ge = simpleGameEngine(0,5,320,187);
+   //simpleGameEngine ge = simpleGameEngine();
+  //ge.Construct(320, 200, 1, 1, false, false);  
+  //ge.setPixelSize(16);  
+  // ge.Start();
+  //printf("Should not happen!");
+ge.setPixelSize(16);
   ge.drawPixel(5,5,1);
   ge.drawPixel(6,6,14);
   //  short framecount=0;

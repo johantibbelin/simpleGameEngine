@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <cmath>
+#include <math.h>
 
 #else
 #include <stdio.h>
@@ -107,7 +107,7 @@ void fillRectangle(short x1,short y1,short x2,short y2,short c);
  void drawLine(short x1,short y1,short x2, short y2, short c);
  void drawCircle(short x,short y,short radius,short c);
  void fillCircle(short x, short y, short radius, short c);
- virtual int OnUserUpdate(int time) = 0;
+ int OnUserUpdate(int time);
 #if defined(__cplusplus)
 };
 #endif
