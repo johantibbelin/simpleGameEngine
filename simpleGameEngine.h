@@ -26,6 +26,12 @@
 #include <gem.h>
 #endif
 #include <string>
+#include <iostream>
+#include <vector>
+#include <map>
+
+#define UNUSED(x) (void)(x)
+
 //c linkage functions
 #if defined(__cplusplus)
 extern "C" {
@@ -47,7 +53,11 @@ namespace olc
 	constexpr uint32_t nDefaultPixel = (nDefaultAlpha << 24);
 	enum rcode { FAIL = 0, OK = 1, NO_FILE = -1 };
 
-	
+	struct ResourceBuffer : public std::streambuf
+	{
+		ResourceBuffer(std::ifstream &ifs, uint32_t offset, uint32_t size);
+		std::vector<char> vMemory;
+	};	
 
 	// O------------------------------------------------------------------------------O
 	// | olc::Pixel - Represents a 32-Bit RGBA colour                                 |
@@ -103,25 +113,16 @@ namespace olc
 	{
 	public:
 		Sprite();
-#if !defined(__WITH_STDIO__)
-		Sprite(const std::string& sImageFile, olc::ResourcePack *pack = nullptr);
-#else
-		Sprite(const std::string& sImageFile, char *pack = nullptr);
-#endif
+		Sprite(const std::string& sImageFile);
 		Sprite(int32_t w, int32_t h);
 		~Sprite();
 
 	public:
-#if !defined(__WITH_STDIO__)
-		olc::rcode LoadFromFile(const std::string& sImageFile, olc::ResourcePack *pack = nullptr);
-#else
 		olc::rcode LoadFromFile(const std::string& sImageFile, char *pack = nullptr);
-#endif
-#if !defined(__WITH_STDIO__)
-		olc::rcode LoadFromPGESprFile(const std::string& sImageFile, olc::ResourcePack *pack = nullptr);
-#else
+
+
 		olc::rcode LoadFromPGESprFile(const std::string& sImageFile, char *pack = nullptr);
-#endif
+
 		olc::rcode SaveToPGESprFile(const std::string& sImageFile);
 
 	public:
@@ -205,6 +206,27 @@ namespace olc
 		bool bReleased = false;	// Set once during the frame the event occurs
 		bool bHeld = false;		// Set true for all frames between pressed and released events
 	};
+
+	/*	class ResourcePack : public std::streambuf
+	{
+	public:
+		ResourcePack();
+		~ResourcePack();
+		bool AddFile(const std::string& sFile);
+		bool LoadPack(const std::string& sFile, const std::string& sKey);
+		bool SavePack(const std::string& sFile, const std::string& sKey);
+		ResourceBuffer GetFileBuffer(const std::string& sFile);
+		bool Loaded();
+	private:
+		struct sResourceFile { uint32_t nSize; uint32_t nOffset; };
+		std::map<std::string, sResourceFile> mapFiles;
+
+		std::ifstream baseFile;
+
+		std::vector<char> scramble(const std::vector<char>& data, const std::string& key);
+		std::string makeposix(const std::string& path);
+		};*/
+
 }
 
 class simpleGameEngine 
