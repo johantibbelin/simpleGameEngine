@@ -2,7 +2,7 @@
 
 LIBCMINI=/opt/libcmini
 CXX = m68k-atari-mint-g++-8
-CXXFLAGS = -g -O2 -Wall -std=c++17 -fno-exceptions -D__ATARI_ST__ -Wl,--traditional-format
+CXXFLAGS = -O2 -Wall -std=c++17 -fno-exceptions -D__WITH_STDIO__ -D__ATARI_ST__ 
 src = $(wildcard *.cpp)
 obj = $(src:.cpp=.o)
 
