@@ -20,7 +20,7 @@ namespace olc {
 
 
   Sprite::Sprite(const std::string& sImageFile)
-	{ LoadFromFile(sImageFile); }
+  { /*LoadFromFile(sImageFile);*/ }
 
 
 
@@ -133,7 +133,19 @@ namespace olc {
 		return Pixel(uint8_t(red * 255.0f), uint8_t(green * 255.0f), uint8_t(blue * 255.0f), uint8_t(alpha * 255.0f));
 	}
   // Sprite Load from file
-	olc::rcode Sprite::LoadFromFile(const std::string& sImageFile, char* pack)
+  olc::rcode Sprite::LoadFromFile(const std::string& sImageFile, char *pack)
+	{
+	  const char *s = sImageFile.c_str();
+	  FILE *fp = fopen(s,"r");
+	  if (fp == nullptr)
+	    return olc::FAIL;
+	  // File is in Degas format
+	  if (sImageFile.find(".pi1",0) || sImageFile.find(".PI1", 0))
+	    {
+	      
+	    }
+	}
+  /*	olc::rcode Sprite::LoadFromFile(const std::string& sImageFile, char* pack)
 	{
 		UNUSED(pack);
 		////////////////////////////////////////////////////////////////////////////
@@ -214,7 +226,7 @@ namespace olc {
 		  /*ResourceBuffer rb = pack->GetFileBuffer(sImageFile);
 			std::istream is(&rb);
 			png_set_read_fn(png, (png_voidp)&is, pngReadStream);
-			loadPNG();*/
+			loadPNG();
 		}
 
 		return olc::OK;
@@ -224,7 +236,7 @@ namespace olc {
 		height = 0;
 		pColData = nullptr;
 		return olc::FAIL;
-	}
+		}*/
 
  
 } // namespace olc

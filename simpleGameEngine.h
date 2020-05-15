@@ -119,7 +119,7 @@ namespace olc
 
 	public:
 		olc::rcode LoadFromFile(const std::string& sImageFile, char *pack = nullptr);
-
+		olc::rcode LoadFromFile(const std::string& sImageFile);
 
 		olc::rcode LoadFromPGESprFile(const std::string& sImageFile, char *pack = nullptr);
 
