@@ -142,6 +142,8 @@ namespace olc
 		Pixel* GetData();
 		Pixel *pColData = nullptr;
 		Mode modeSample = Mode::NORMAL;
+		uint16_t *bpData;
+		uint16_t palette[16];
 	};
 
 #if !defined(OLC_IGNORE_VEC2D)
