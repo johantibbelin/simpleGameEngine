@@ -16,7 +16,7 @@
 // Sprite impl
 namespace olc {
 	Sprite::Sprite()
-	{ pColData = nullptr; width = 0; height = 0; }
+	{ pColData = nullptr; bpData= nullptr; width = 0; height = 0; }
 
 
   Sprite::Sprite(const std::string& sImageFile)
@@ -28,9 +28,10 @@ namespace olc {
 	{
 		if(pColData) delete[] pColData;
 		width = w;		height = h;
-		pColData = new Pixel[width * height];
-		for (int32_t i = 0; i < width*height; i++)
-			pColData[i] = Pixel();
+		//pColData = new Pixel[width * height];
+		//for (int32_t i = 0; i < width*height; i++)
+		//pColData[i] = Pixel();
+		bpData = new uint16_t[(width / 16) * 4 * height];
 	}
 
 	Sprite::~Sprite()
