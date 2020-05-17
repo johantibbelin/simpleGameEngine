@@ -144,6 +144,7 @@ namespace olc
 		Mode modeSample = Mode::NORMAL;
 		uint16_t *bpData;
 		uint16_t palette[16];
+		uint16_t endMask=0;
 	};
 
 #if !defined(OLC_IGNORE_VEC2D)

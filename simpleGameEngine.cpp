@@ -32,6 +32,7 @@ namespace olc {
 		//for (int32_t i = 0; i < width*height; i++)
 		//pColData[i] = Pixel();
 		bpData = new uint16_t[(width / 16) * 4 * height];
+		endMask = 0xffff << (16 - (width % 16));
 	}
 
 	Sprite::~Sprite()
